@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'permission:rooms'])->group(function () {
     Route::prefix('/dashboard')->group(function () {
         //Movies CRUD
         Route::get('/movies', [MovieController::class, 'index'])->name('movie.index');
