@@ -47,7 +47,7 @@
     <meta name="facebook-domain-verification" content="v4857mr3kkkqrb6wq6611i0bn1nm2j" />
 
 
-    <!--script src="https://www.scopecinemas.com/skin/js/main.js?v=1.0.1"></script-->
+    {{-- <script src="https://www.scopecinemas.com/skin/js/main.js?v=1.0.1"></script> --}}
 
     <script>
         (function(i, s, o, g, r, a, m) {
@@ -338,6 +338,8 @@
                             </div>
                         </div>
 
+                        
+
                     </div>
 
                     <a href="/buy-tickets-online" class="side-bt-btn">
@@ -352,13 +354,13 @@
 
 
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
                     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
 
                 </div>
             </section>
@@ -493,7 +495,7 @@
 
             <!-- ==================NOW SHOWING SECTION - small screen================== -->
             <!-- ==================COMING SOON SECTION - small screen================= -->
-            <section id="comming-soon" class="d-block d-md-none">
+            {{-- <section id="comming-soon" class="d-block d-md-none">
 
                 <div class="container-fluid">
                     <div class="container">
@@ -561,7 +563,7 @@
 
                     </div>
                 </div>
-            </section>
+            </section> --}}
 
 
             <!-- =======================DEALS & EXCLUSIVE SECTION======================= -->
@@ -650,6 +652,7 @@
 
 
 
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
 
     <script src="https://checkout.stripe.com/checkout.js"></script>
