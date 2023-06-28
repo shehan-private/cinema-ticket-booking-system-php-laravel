@@ -19,6 +19,23 @@
         </ul>
     </li>
     {{-- @endcan --}}
+
+    {{-- Session menu --}}
+
+    <li class="nav-item menu-is-opening menu-open">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-bed"></i><p>Sessions<i class="fas fa-angle-left right"></i></p>
+        </a>
+        <ul class="nav nav-treeview" style="display: block;">
+            <li class="nav-item">
+                <a href="{{route('session.index')}}" class="nav-link {{ Request::is('session.index') ? 'active' : '' }}"><i class="fas fa-list nav-icon"></i><p>All Sessions</p></a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('session.create')}}" class="nav-link {{ Request::is('session.create') ? 'active' : '' }}"><i class="fas fa-folder-plus nav-icon"></i><p>Add Session</p></a>
+            </li>
+        </ul>
+    </li>
+
 </li>
 {{-- <i class="fa-solid fa-clapperboard"></i> --}}
 {{-- <i class="fa-solid fa-film"></i> --}}
