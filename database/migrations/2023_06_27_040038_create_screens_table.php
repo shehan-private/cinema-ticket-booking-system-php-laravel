@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('screens', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('class_id')->constrained();
-            $table->string('name', 10);
+            $table->string('name', 10)->unique();
+            $table->foreignId('classModel_id')->constrained();
             $table->integer('capacity');
             $table->timestamps();
         });

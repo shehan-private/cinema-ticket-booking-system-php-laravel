@@ -3,7 +3,10 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MovieController;
-use App\Http\Controller\SessionController;
+use App\Http\Controllers\ClassModelController;
+use App\Http\Controllers\ScreenController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +35,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () { // 'permission:dashboard'
     Route::prefix('/dashboard')->group(function () {
+
         //Movies CRUD
         Route::get('/movies', [MovieController::class, 'index'])->name('movie.index');
         Route::prefix('/movie')->group(function(){
@@ -51,6 +55,37 @@ Route::middleware(['auth'])->group(function () { // 'permission:dashboard'
             Route::patch('/{session}/edit',[SessionController::class, 'update'])->name('session.update');
             Route::get('/{session}/delete',[SessionController::class, 'destroy'])->name('session.destroy');
         });
+
+        //ClassModel CRUD
+        Route::get('/classes', [ClassModelController::class, 'index'])->name('class.index');
+        Route::prefix('/class')->group(function(){
+            Route::get('/add',[ClassModelController::class, 'create'])->name('class.create');
+            Route::post('/add',[ClassModelController::class, 'store'])->name('Class.store');
+            Route::get('/{class}/edit',[ClassModelController::class, 'edit'])->name('Class.edit');
+            Route::patch('/{class}/edit',[ClassModelController::class, 'update'])->name('Class.update');
+            Route::get('/{class}/delete',[ClassModelController::class, 'destroy'])->name('Class.destroy');
+        });
+
+        //Screens CRUD
+        Route::get('/screens', [ScreenController::class, 'index'])->name('screen.index');
+        Route::prefix('/screen')->group(function(){
+            Route::get('/add',[ScreenController::class, 'create'])->name('screen.create');
+            Route::post('/add',[ScreenController::class, 'store'])->name('screen.store');
+            Route::get('/{screen}/edit',[ScreenController::class, 'edit'])->name('screen.edit');
+            Route::patch('/{screen}/edit',[ScreenController::class, 'update'])->name('screen.update');
+            Route::get('/{screen}/delete',[ScreenController::class, 'destroy'])->name('screen.destroy');
+        });
+
+        //Categories CRUD
+        Route::get('/categorys', [CategoryController::class, 'index'])->name('category.index');
+        Route::prefix('/category')->group(function(){
+            Route::get('/add',[CategoryController::class, 'create'])->name('category.create');
+            Route::post('/add',[CategoryController::class, 'store'])->name('category.store');
+            Route::get('/{category}/edit',[CategoryController::class, 'edit'])->name('category.edit');
+            Route::patch('/{category}/edit',[CategoryController::class, 'update'])->name('category.update');
+            Route::get('/{category}/delete',[CategoryController::class, 'destroy'])->name('category.destroy');
+        });
+
     });
 });
 

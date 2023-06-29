@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('screen_id')->constrained();
-            $table->foreignID('movie_id')->constrained();
             $table->integer('date');
+            $table->foreignId('screen_id')->constrained();
             $table->foreignId('time_id')->constrained();
+            $table->foreignID('movie_id')->constrained();
             $table->string('status',10);
             $table->integer('attend_full');
             $table->integer('attend_half');
