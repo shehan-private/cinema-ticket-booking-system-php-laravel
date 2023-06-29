@@ -5,15 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSessionRequest;
 use App\Http\Requests\UpdateSessionRequest;
 use App\Models\Session;
+use App\Models\Time;
+use App\Models\Screen;
+use App\Models\Movie;
 
 class SessionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    
     public function index()
     {
-        //
+        $sessions = Session::all();
+        $times = Time::all();
+        $screens = Screen::all();
+        $movies = Movie::all();
+        
+        // dd($sessions);
+
+        return view ('admin.session.index', compact('sessions','times','screens','movies'));
+        
     }
 
     /**
@@ -21,7 +33,12 @@ class SessionController extends Controller
      */
     public function create()
     {
-        return view ('admin.session.create');
+        $sessions = Session::all();
+        $times = Time::all();
+        $screens = Screen::all();
+        $movies = Movie::all();
+
+        return view ('admin.session.create', compact('times','screens','movies'));
     }
 
     /**
@@ -29,7 +46,25 @@ class SessionController extends Controller
      */
     public function store(StoreSessionRequest $request)
     {
-        //
+        // dd($request);
+        $timeVal = $request->time;
+        $movieVal = $request->movie;
+
+        for ($i=0; $i < count($timeVal); $i++) {
+            if ($timeVal[$i] != 'Select Time' && $movieVal[$i] != 'Select Time') {
+                $data = [
+                    'date' => strtotime($request->date),
+                    'screen_id' => (int)($request->screen),
+                    'time_id' => (int)($timeVal[$i]),
+                    'movie_id' => (int)($movieVal[$i]),
+                    'status' => 'Scheduled',
+                ];
+                // dd($data);
+                Session::create($data);
+            }
+        }
+
+        return redirect()->route('session.create');
     }
 
     /**

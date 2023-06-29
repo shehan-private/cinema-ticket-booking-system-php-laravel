@@ -32,7 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 Route::middleware(['auth'])->group(function () { // 'permission:dashboard'
     Route::prefix('/dashboard')->group(function () {
 
@@ -77,7 +76,7 @@ Route::middleware(['auth'])->group(function () { // 'permission:dashboard'
         });
 
         //Categories CRUD
-        Route::get('/categorys', [CategoryController::class, 'index'])->name('category.index');
+        Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
         Route::prefix('/category')->group(function(){
             Route::get('/add',[CategoryController::class, 'create'])->name('category.create');
             Route::post('/add',[CategoryController::class, 'store'])->name('category.store');

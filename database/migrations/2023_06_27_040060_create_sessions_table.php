@@ -18,9 +18,9 @@ return new class extends Migration
             $table->foreignId('time_id')->constrained();
             $table->foreignID('movie_id')->constrained();
             $table->string('status',10);
-            $table->integer('attend_full');
-            $table->integer('attend_half');
-            $table->decimal('income',10,2);
+            $table->integer('attend_full')->nullable();
+            $table->integer('attend_half')->nullable();
+            $table->decimal('income',10,2)->nullable();
             $table->timestamps();
         });
     }

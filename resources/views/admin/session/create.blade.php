@@ -2,102 +2,85 @@
     @section('content')
         <div class="card card-primary m-3">
             <div class="card-header">
-            <h3 class="card-title">Add Movie</h3>
+                <h3 class="card-title">Add Session</h3>
             </div>
             <form method="POST">
                 @csrf
                 <div class="card-body">
 
-                    <div class="form-group">
-                        <label for="title">Movie Title</label>
-                        <input type="text" class="form-control" id="title" placeholder="Movie title" name="title"> 
-                    </div>
-
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-3">
                             <div class="form-group">
-                                <label for="director">Director</label>
-                                <input type="text" class="form-control" id="director" placeholder="Director" name="director"> 
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="producer">Producer</label>
-                                <input type="text" class="form-control" id="producer" placeholder="Producer" name="producer"> 
+                                <label for="date">Date</label>
+                                <input type="date" class="form-control" id="date" placeholder="Movie title" name="date">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="writer">Writer</label>
-                                <input type="text" class="form-control" id="writer" placeholder="Writer" name="writer"> 
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="duration">Duration</label>
-                                <input type="text" class="form-control" id="duration" placeholder="Duration" name="duration"> 
-                            </div>
+                        <div class="col-9">  
                         </div>
                     </div>
-
+                    <hr>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-3">
                             <div class="form-group">
-                                <label for="genre">Genre</label>
-                                <input type="text" class="form-control" id="genre" placeholder="Genre" name="genre"> 
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                {{-- <label for="duration">Duration</label>
-                                <input type="text" class="form-control" id="duration" placeholder="Duration" name="duration">  --}}
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div class="form-group">
-                        <label for="storyline">Story Line</label>
-                        <textarea class="form-control" name="storyline" id="storyline" placeholder="storyline" rows="5"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="image">Image</label>
-                        <input type="text" class="form-control" id="image" placeholder="Image URL" name="image"> 
-                    </div>
-
-                    <div class="form-group">
-                        <label for="trailer">Trailer</label>
-                        <input type="text" class="form-control" id="trailer" placeholder="Trailer URL" name="trailer"> 
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select class="form-control" name="status">
-                                    <option>Select Status</option>
-                                    <option>Now Showing</option>
-                                    <option>Up Coming</option>
+                                <label for="screen">Screen</label>
+                                <select class="form-control" name="screen">
+                                    <option>Select Screen</option>
+                                    @foreach ($screens as $screen)
+                                        <option value={{$screen->id}}>{{$screen->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="release_date">Release Date</label>
-                                <input type="date" class="form-control" id="release_date" placeholder="Release Date" name="release_date"> 
-                            </div>
+                    <div class="row">
+                        <div class="col-9">  
                         </div>
                     </div>
-                
+
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Movie</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <div class="table_body"></div>
+                                @for ($i=0; $i<6; $i++)
+                                    <tr>
+                                        <td>
+                                            <select class="form-control" name="time[]">
+                                                <option>Select Time</option>
+                                                @foreach ($times as $time)
+                                                    <option value={{$time->id}}>{{$time->time}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" name="movie[]">
+                                                <option>Select movie</option>
+                                                @foreach ($movies as $movie)
+                                                    <option value={{$movie->id}}>{{$movie->title}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                    </tr>
+                                @endfor
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
-            </div>
+        </div>
     @endsection
 </x-app-layout>

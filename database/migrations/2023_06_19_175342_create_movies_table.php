@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('trailer');
             $table->string('status');
-            $table->date('release_date');
+            $table->integer('release_date');
             $table->timestamps();
         });
     }
