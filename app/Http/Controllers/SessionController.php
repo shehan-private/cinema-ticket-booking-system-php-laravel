@@ -106,9 +106,15 @@ class SessionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Session $session)
+    public function show($date)
     {
-        //
+        $sessions = Session::where('date','=',$date)->orderBy('time_id','asc')->orderBy('screen_id','asc')->get();
+        $times = Time::all();
+        $screens = Screen::all();
+        $movies = Movie::all();
+        // dd($sessions);
+        return view('admin.session.show', compact('sessions', 'times', 'screens', 'movies'));
+        
     }
 
     /**

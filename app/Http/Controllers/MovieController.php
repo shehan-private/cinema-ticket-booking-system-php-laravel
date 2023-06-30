@@ -64,7 +64,9 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-        $movie = Movie::find($movie->id);
+        // dd($movie);
+        // $movie = Movie::find($movie->id);
+        // dd($movie);
         return view('admin.movie.edit', compact('movie'));
 
     }
