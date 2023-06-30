@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function () { // 'permission:dashboard'
         Route::prefix('/session')->group(function(){
             Route::get('/add',[SessionController::class, 'create'])->name('session.create');
             Route::post('/add',[SessionController::class, 'store'])->name('session.store');
+            Route::get('/{session}/show',[SessionController::class, 'show'])->name('session.show');
             Route::get('/{session}/edit',[SessionController::class, 'edit'])->name('session.edit');
             Route::patch('/{session}/edit',[SessionController::class, 'update'])->name('session.update');
             Route::get('/{session}/delete',[SessionController::class, 'destroy'])->name('session.destroy');

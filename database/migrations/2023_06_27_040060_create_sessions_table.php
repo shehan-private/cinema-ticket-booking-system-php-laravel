@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
-            $table->integer('date');
+            $table->string('date', 20);
             $table->foreignId('screen_id')->constrained();
             $table->foreignId('time_id')->constrained();
             $table->foreignID('movie_id')->constrained();

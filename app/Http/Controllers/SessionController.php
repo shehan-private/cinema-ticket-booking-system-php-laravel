@@ -17,14 +17,50 @@ class SessionController extends Controller
     
     public function index()
     {
-        $sessions = Session::all();
+        $sessions_today = Session::where('date','=',date('Y-m-d', time()))->orderBy('date','asc')->get();
+        $sessions_schedule = Session::where('status','=','Scheduled')->orderBy('date','asc')->get();
+        $sessions_complete = Session::where('status','=','Completed')->orderBy('date','asc')->get();
+        $sessions = Session::orderBy('date', 'asc')->get();
         $times = Time::all();
         $screens = Screen::all();
         $movies = Movie::all();
-        
-        // dd($sessions);
 
-        return view ('admin.session.index', compact('sessions','times','screens','movies'));
+        $session_dates = array();
+        $session_temp = array(
+            'date' => '',
+            'status' => '',
+            'attend_full' => 0,
+            'attend_half' => 0,
+            'income' => 0
+        );
+        
+        foreach ($sessions as $session) {
+
+            $session_array = array(
+                'date' => $session->date,
+                'status' => $session->status,
+                'attend_full' => $session->attend_full,
+                'attend_half' => $session->attend_half,
+                'income' => $session->income
+            );
+
+            if ($session_array['date'] != $session_temp['date']) {
+                if ($session_temp['date']!= '') {
+                    array_push($session_dates, $session_temp);
+                }
+                
+                $session_temp = $session_array;
+
+            } else {
+
+                $session_temp['attend_full'] += $session_array['attend_full'];
+                $session_temp['attend_half'] += $session_array['attend_half'];
+                $session_temp['income'] += $session_array['income'];
+                
+            }
+        }
+
+        return view ('admin.session.index', compact('session_dates', 'sessions_today','sessions_schedule','sessions_complete','times','screens','movies'));
         
     }
 
@@ -46,20 +82,20 @@ class SessionController extends Controller
      */
     public function store(StoreSessionRequest $request)
     {
-        // dd($request);
+
         $timeVal = $request->time;
         $movieVal = $request->movie;
 
         for ($i=0; $i < count($timeVal); $i++) {
             if ($timeVal[$i] != 'Select Time' && $movieVal[$i] != 'Select Time') {
                 $data = [
-                    'date' => strtotime($request->date),
+                    'date' => $request->date,
                     'screen_id' => (int)($request->screen),
                     'time_id' => (int)($timeVal[$i]),
                     'movie_id' => (int)($movieVal[$i]),
                     'status' => 'Scheduled',
                 ];
-                // dd($data);
+
                 Session::create($data);
             }
         }
