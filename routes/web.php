@@ -60,10 +60,10 @@ Route::middleware(['auth'])->group(function () { // 'permission:dashboard'
         Route::get('/classes', [ClassModelController::class, 'index'])->name('class.index');
         Route::prefix('/class')->group(function(){
             Route::get('/add',[ClassModelController::class, 'create'])->name('class.create');
-            Route::post('/add',[ClassModelController::class, 'store'])->name('Class.store');
-            Route::get('/{class}/edit',[ClassModelController::class, 'edit'])->name('Class.edit');
-            Route::patch('/{class}/edit',[ClassModelController::class, 'update'])->name('Class.update');
-            Route::get('/{class}/delete',[ClassModelController::class, 'destroy'])->name('Class.destroy');
+            Route::post('/add',[ClassModelController::class, 'store'])->name('class.store');
+            Route::get('/{classModel}/edit',[ClassModelController::class, 'edit'])->name('class.edit');
+            Route::patch('/{classModel}/edit',[ClassModelController::class, 'update'])->name('class.update');
+            Route::get('/{classModel}/delete',[ClassModelController::class, 'destroy'])->name('class.destroy');
         });
 
         //Screens CRUD
