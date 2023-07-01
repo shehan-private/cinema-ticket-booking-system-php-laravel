@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreScreenRequest;
 use App\Http\Requests\UpdateScreenRequest;
 use App\Models\Screen;
+use App\Models\ClassModel;
+use App\Models\Session;
 
 class ScreenController extends Controller
 {
@@ -13,7 +15,10 @@ class ScreenController extends Controller
      */
     public function index()
     {
-        //
+        $screens = Screen::all();
+        $classModels = ClassModel::all();
+
+        return view('admin.screen.index', compact('screens', 'classModels'));
     }
 
     /**
@@ -21,7 +26,8 @@ class ScreenController extends Controller
      */
     public function create()
     {
-        //
+        $classModels = ClassModel::all();
+        return view('admin.screen.create', compact('classModels'));
     }
 
     /**
@@ -29,7 +35,17 @@ class ScreenController extends Controller
      */
     public function store(StoreScreenRequest $request)
     {
-        //
+
+        // dd($request);
+        $data = [
+            'name' => $request->name,
+            'classModel_id' => $request->class,
+            'capacity' => $request->capacity,
+        ];
+
+        Screen::create($data);
+
+        return redirect()->route('screen.index');
     }
 
     /**
@@ -45,7 +61,10 @@ class ScreenController extends Controller
      */
     public function edit(Screen $screen)
     {
-        //
+        $screen = Screen::find($screen->id);
+        $classModels = ClassModel::all();
+
+        return view('admin.screen.edit', compact('screen', 'classModels'));
     }
 
     /**
@@ -53,7 +72,16 @@ class ScreenController extends Controller
      */
     public function update(UpdateScreenRequest $request, Screen $screen)
     {
-        //
+        $data = [
+            'name' => $request->name,
+            'classModel_id' => $request->class,
+            'capacity' => $request->capacity,
+        ];
+
+        $screen = Screen::find($screen->id);
+        $screen->update($data);
+
+        return redirect()->route('screen.index');
     }
 
     /**
@@ -61,6 +89,14 @@ class ScreenController extends Controller
      */
     public function destroy(Screen $screen)
     {
-        //
+        $screen = Screen::find($screen->id);
+
+        if (Session::where('screen_id','=',$screen->id)->count()) {
+
+        } else {
+            $screen->delete();   
+        }
+
+        return redirect()->route('screen.index');
     }
 }

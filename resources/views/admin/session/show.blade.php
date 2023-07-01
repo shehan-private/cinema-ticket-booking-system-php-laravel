@@ -1,7 +1,7 @@
 <x-app-layout>
     @section('content')
 
-        <div class="card card-success m-3">
+        <div class="card card-primary m-3">
             <div class="card-header">
                 <h3 class="card-title">Sessions Details</h3>
             </div>

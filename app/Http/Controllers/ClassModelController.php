@@ -81,14 +81,11 @@ class ClassModelController extends Controller
 
         if (Screen::where('classModel_id','=',$classModel->id)->count() || Category::where('classModel_id','=',$classModel->id)->count()) {
 
-            return redirect()->route('class.index');
-
         } else {
-
             $classModel->delete();
-            return redirect()->route('class.index');
         }
         
+        return redirect()->route('class.index');
         
     }
 }

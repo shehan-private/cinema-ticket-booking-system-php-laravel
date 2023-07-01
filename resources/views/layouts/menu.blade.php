@@ -52,6 +52,22 @@
         </ul>
     </li>
 
+    {{-- Screen menu --}}
+
+    <li class="nav-item menu-is-opening menu-open">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-bed"></i><p>Screens<i class="fas fa-angle-left right"></i></p>
+        </a>
+        <ul class="nav nav-treeview" style="display: block;">
+            <li class="nav-item">
+                <a href="{{route('screen.index')}}" class="nav-link {{ Request::is('screen.index') ? 'active' : '' }}"><i class="fas fa-list nav-icon"></i><p>All Screens</p></a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('screen.create')}}" class="nav-link {{ Request::is('screen.create') ? 'active' : '' }}"><i class="fas fa-folder-plus nav-icon"></i><p>Add Screen</p></a>
+            </li>
+        </ul>
+    </li>
+
 </li>
 {{-- <i class="fa-solid fa-clapperboard"></i> --}}
 {{-- <i class="fa-solid fa-film"></i> --}}
