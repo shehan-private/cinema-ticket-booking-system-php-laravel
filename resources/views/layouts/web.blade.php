@@ -273,75 +273,56 @@
         <div id="home" v-cloak>
 
             <!-- ==============================MAIN BANNER============================= -->
+            
             <section id="main-banner">
-                <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" v-for="(slider, index) in slider" :data-slide-to="index" :class="{ 'active': index === 0 }"></li>
-                        
-                    </ol>
-                    <div class="carousel-inner ">
+                <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel" data-interval="5000" data-pause="false">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img class="d-block w-100" src="/img/f7839864-8ca7-4c65-9eb0-b078a14b46bd.jpg" alt="First slide">
+                        <div class="innerBannerCaption">
+                            <div class="captionCont bannerCaption ">
+                                <div class="captionWrap">
+                                    <div class="caption">
+                                        <div class="topCap topcap-title">Sub Title</div>
+                                        <h2 class="capTitle">Title</h2>
+                                        <div class="topCap bt-topcap">Buy tickets online</div>
 
-                        <div class="carousel-item " :class="{ 'active': index === 0 }" v-for="(slider, index) in slider">
-                            <div class="innerHeader">
-                                <div class="bannerCont ">
-                                    <div class="bannerWrap">
-
-                                        <img :src="slider.sliderImage" alt="" class="img-fluid w-100 d-none d-lg-block ">
-                                        <img :src="slider.mobileImage" alt="" class="img-fluid w-100 d-block d-lg-none ">
-
-                                        <div class="gradientOverlay"></div>
-                                        <div class="innerBannerCaption">
-                                            <div class="captionCont bannerCaption ">
-                                                <div class="captionWrap">
-                                                    <div class="caption">
-                                                        <div class="topCap topcap-title">Sub Title</div>
-                                                        <h2 class="capTitle">Title</h2>
-                                                        <div class="topCap bt-topcap" v-if="slider.buyTicketsLink">Buy tickets online</div>
-
-                                                        <div class="movieDetail">
-                                                            <div class="header-btn">
-                                                                <a :href="slider.buyTicketsLink" v-if="slider.buyTicketsLink" class="buy-tickets">
-                                                                    <p class="site-btns"><b>Buy</b> Tickets <br> <b>Online</b></p>
-                                                                    <div class="bord"></div>
-                                                                </a>
-                                                                <a href="#" class="buy-tickets watch-trailer" v-if="slider.trailerId" @Click="" data-toggle="modal" data-target="#videoModal">
-                                                                    <p class="site-btns">watch <br> <b>trailer</b></p>
-                                                                    <div class="bord"></div>
-                                                                </a>
-                                                                <a href="/movies?festival=true" class="buy-tickets more-info" v-if="slider.id == '5f4664591ab91400161ba718'">
-                                                                    <p class="site-btns"><b>More </b><br/> Info </p>
-                                                                    <div class="bord"></div>
-                                                                </a>
-
-                                                            </div>
-
-                                                            <div class="header-btn small">
-                                                                <a v-if="slider.buyTicketsLink" :href="slider.buyTicketsLink" class="buy-tickets bt">
-                                                                    <p class="site-btns"><b>Buy</b> Tickets</p>
-                                                                </a>
-                                                                <a href="#" class="buy-tickets watch-trailer" v-if="slider.trailerId" @Click="" data-toggle="modal" data-target="#videoModal">
-                                                                    <p class="site-btns">watch <b>trailer</b></p>
-                                                                </a>
-                                                                <a href="/movies?festival=true" class="buy-tickets more-info" v-if="slider.id == '5f4664591ab91400161ba718'" style="background-position: left 9px center;">
-                                                                    <p class="site-btns"><b>More </b><br/> Info </p>
-                                                                </a>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div class="movieDetail">
+                                            <div class="header-btn">
+                                                <a href="#" class="buy-tickets">
+                                                    <p class="site-btns"><b>Buy</b> Tickets <br> <b>Online</b></p>
+                                                    <div class="bord"></div>
+                                                </a>
+                                                <a href="#" class="buy-tickets watch-trailer" data-toggle="modal" data-target="#videoModal">
+                                                    <p class="site-btns">watch <br> <b>trailer</b></p>
+                                                    <div class="bord"></div>
+                                                </a>
 
                                             </div>
+
+                                            <div class="header-btn small">
+                                                <a href="" class="buy-tickets bt">
+                                                    <p class="site-btns"><b>Buy</b> Tickets</p>
+                                                </a>
+                                                <a href="#" class="buy-tickets watch-trailer" data-toggle="modal" data-target="#videoModal">
+                                                    <p class="site-btns">watch <b>trailer</b></p>
+                                                </a>
+                                                
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
-
-                        
-
                     </div>
-
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="/img/368d7394-74d4-4bb7-a1ef-c9ba8ca0c3a9.jpg" alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="/img/ccf17b34-8d7c-4eb7-9a7e-99c91bb62d1b.jpg" alt="Third slide">
+                    </div>
                     <a href="/buy-tickets-online" class="side-bt-btn">
                         <div class="side-bar">
                             <div class="buyTicketsWrap">
@@ -351,19 +332,9 @@
                             </div>
                         </div>
                     </a>
-
-
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-
                 </div>
             </section>
+            
 
 
             <!-- ==========================TRAILER VIDEO MODEL======================== -->
@@ -410,11 +381,12 @@
                         <div class="swiper-container nowShowingSwiperSlider">
                             <div class="swiper-wrapper ">
 
-                                <div class="swiper-slide" v-for="nowShowingMovie in nowShowing" :style="{ backgroundImage: 'url(' + nowShowingMovie.banner_image + ')' }">
-                                    <a :href="'/movie/'+ nowShowingMovie.slug">
+                                {{-- <div class="swiper-slide" v-for="nowShowingMovie in nowShowing" :style="{ backgroundImage: 'url(' + nowShowingMovie.banner_image + ')' }"> --}}
+                                <div class="swiper-slide" style="{ backgroundImage: 'url('/img/f7839864-8ca7-4c65-9eb0-b078a14b46bd.jpg')' }">
+                                    <a href="/img/f7839864-8ca7-4c65-9eb0-b078a14b46bd.jpg">
                                         <div class="overlay"></div>
                                     </a>
-                                    <div class="movie-caption">
+                                    {{-- <div class="movie-caption">
                                         <a :href="'/movie/'+ nowShowingMovie.slug">
                                             <p class="movie-name">Now showing movie name</p>
                                         </a>
@@ -428,7 +400,7 @@
                                                 <div class="bord"></div>
                                             </a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                             </div>
