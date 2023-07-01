@@ -35,8 +35,8 @@
                             <td>{{$movie->release_date}}</td>
                             <td>{{$movie->status}}</td>
                             <td>
-                                <a href="{{route('movie.edit', $movie->id)}}" class="btn btn-primary">Edit</a>
-                                <a href="{{route('movie.destroy', $movie->id)}}" class="btn btn-danger">Delete</a>
+                                <a href="{{route('movie.edit', $movie->id)}}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{route('movie.destroy', $movie->id)}}" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
                         @endforeach

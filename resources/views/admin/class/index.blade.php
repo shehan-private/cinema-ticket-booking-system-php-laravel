@@ -22,8 +22,8 @@
                             <td>{{$classModel->name}}</td>
                             <td></td>
                             <td>
-                                <a href="{{route('class.edit', $classModel->id)}}" class="btn btn-primary">Edit</a>
-                                <a href="{{route('class.destroy', $classModel->id)}}" class="btn btn-danger">Delete</a>
+                                <a href="{{route('class.edit', $classModel->id)}}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{route('class.destroy', $classModel->id)}}" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
                         @endforeach

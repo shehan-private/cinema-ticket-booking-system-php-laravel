@@ -32,8 +32,8 @@
                                 <td>{{$session->attend_half}}</td>
                                 <td>{{$session->income}}</td>
                                 <td>
-                                    <a href="{{route('session.edit', $session->screen_id)}}" class="btn btn-primary">Edit</a>
-                                    <a href="{{route('session.destroy', $session->screen_id)}}" class="btn btn-danger">Delete</a>
+                                    <a href="{{route('session.edit', $session->screen_id)}}" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="{{route('session.destroy', $session->screen_id)}}" class="btn btn-sm btn-danger">Delete</a>
                                 </td>
                             </tr>
                         @endforeach

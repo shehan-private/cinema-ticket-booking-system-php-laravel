@@ -25,8 +25,8 @@
                             <td>{{$screen->capacity}}</td>
                             
                             <td>
-                                <a href="{{route('screen.edit', $screen->id)}}" class="btn btn-primary">Edit</a>
-                                <a href="{{route('screen.destroy', $screen->id)}}" class="btn btn-danger">Delete</a>
+                                <a href="{{route('screen.edit', $screen->id)}}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{route('screen.destroy', $screen->id)}}" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
                         @endforeach
