@@ -361,7 +361,7 @@
 
 
             <!-- ==================NOW SHOWING SECTION - large screen================== -->
-            <section id="now-showing" class="d-none d-md-block">
+            {{-- <section id="now-showing" class="d-none d-md-block">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="container">
@@ -378,42 +378,185 @@
                             </div>
                         </div>
 
-                        <div class="swiper-container nowShowingSwiperSlider">
-                            <div class="swiper-wrapper ">
+                        <div class="container ">
+                            <swiper-container class="" slides-per-view="3" speed="500" loop="true" css-mode="true">
+                                <swiper-slide>
+                                    <img src="/img/368d7394-74d4-4bb7-a1ef-c9ba8ca0c3a9.jpg" alt="Image 1">
+                                    <div class="overlay"></div>
+                                </swiper-slide>
+                                <swiper-slide><img src="/img/ccf17b34-8d7c-4eb7-9a7e-99c91bb62d1b.jpg" alt="Image 1">
+                                    <div class="overlay"></div></swiper-slide>
+                                <swiper-slide><img src="/img/f7839864-8ca7-4c65-9eb0-b078a14b46bd.jpg" alt="Image 1">
+                                    <div class="overlay"></div></swiper-slide>
+                                
+                            </swiper-container>
+                        </div>
 
-                                {{-- <div class="swiper-slide" v-for="nowShowingMovie in nowShowing" :style="{ backgroundImage: 'url(' + nowShowingMovie.banner_image + ')' }"> --}}
-                                <div class="swiper-slide" style="{ backgroundImage: 'url('/img/f7839864-8ca7-4c65-9eb0-b078a14b46bd.jpg')' }">
-                                    <a href="/img/f7839864-8ca7-4c65-9eb0-b078a14b46bd.jpg">
-                                        <div class="overlay"></div>
-                                    </a>
-                                    {{-- <div class="movie-caption">
-                                        <a :href="'/movie/'+ nowShowingMovie.slug">
-                                            <p class="movie-name">Now showing movie name</p>
-                                        </a>
-                                        <div class="header-btn">
-                                            <a v-if="nowShowingMovie.theater != ''" :href="'/buy-tickets-online/'+nowShowingMovie.id" class="buy-tickets">
-                                                <p class="site-btns"><b>Buy</b> Tickets <br> <b>Online</b></p>
-                                                <div class="bord"></div>
-                                            </a>
-                                            <a href="#" class="buy-tickets watch-trailer" v-if="nowShowingMovie.you_tube_id" @Click="" data-toggle="modal" data-target="#videoModal">
-                                                <p class="site-btns">watch <br> <b>trailer</b></p>
-                                                <div class="bord"></div>
-                                            </a>
+                        
+
+                    </div>
+                </div>
+            </section> --}}
+
+            <section id="now-showing" class="d-none d-md-block">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="secTitleWrap titleRight">
+                                        <h3 class="mod_header">NOW SHOWING</h3>
+                                        <div class="sliderArrowCont">
+                                            <div class="swiperButtonArrow swiper-button-prev swiper-button-white-top"></div>
+                                            <div class="swiperButtonArrow swiper-button-next swiper-button-white-top"></div>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+            
+                        <div class="swiper-container nowShowingSwiperSlider">
+                            <div class="swiper-wrapper">
 
+                                <!-- Backend data loading with PHP -->
+                                <?php
+                                // Assuming you have an array of movies from the backend
+                                $nowShowing = [
+                                    [
+                                        'banner_image' => '/img/368d7394-74d4-4bb7-a1ef-c9ba8ca0c3a9.jpg',
+                                        'slug' => 'movie-slug-1',
+                                        'name' => 'Now Showing Movie 1',
+                                        'theater' => true,
+                                        'id' => 1,
+                                        'you_tube_id' => 'video-id-1'
+                                    ],
+                                    [
+                                        'banner_image' => '/img/ccf17b34-8d7c-4eb7-9a7e-99c91bb62d1b.jpg',
+                                        'slug' => 'movie-slug-2',
+                                        'name' => 'Now Showing Movie 2',
+                                        'theater' => true,
+                                        'id' => 2,
+                                        'you_tube_id' => 'video-id-2'
+                                    ]
+                                    // Add more movie data as needed
+                                ]; ?>
+
+
+                                @foreach ($nowShowing as $nowShowingMovie)
+                                    <div class="swiper-slide" style="background-image: url({{ $nowShowingMovie['banner_image'] }})">
+                                        <a href="/movie/{{ $nowShowingMovie['slug'] }}">
+                                            <div class="overlay"></div>
+                                        </a>
+                                        <div class="movie-caption">
+                                            <a href="/movie/{{ $nowShowingMovie['slug'] }}">
+                                                <p class="movie-name">{{ strtoupper($nowShowingMovie['name']) }}</p>
+                                            </a>
+                                            <div class="header-btn">
+                                                @if ($nowShowingMovie['theater'] != '')
+                                                    <a href="/buy-tickets-online/{{ $nowShowingMovie['id'] }}" class="buy-tickets">
+                                                        <p class="site-btns"><b>Buy</b> Tickets <br> <b>Online</b></p>
+                                                        <div class="bord"></div>
+                                                    </a>
+                                                @endif
+                                                @if ($nowShowingMovie['you_tube_id'])
+                                                    <a href="#" class="buy-tickets watch-trailer" data-toggle="modal" data-target="#videoModal" data-video-id="{{ $nowShowingMovie['you_tube_id'] }}">
+                                                        <p class="site-btns">watch <br> <b>trailer</b></p>
+                                                        <div class="bord"></div>
+                                                    </a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="swiperButtonArrow swiper-button-prev swiper-button-white"></div>
                             <div class="swiperButtonArrow swiper-button-next swiper-button-white"></div>
                         </div>
-
                     </div>
                 </div>
             </section>
 
+            {{-- <section id="now-showing" class="d-none d-md-block">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="secTitleWrap titleRight">
+                                        <h3 class="mod_header">NOW SHOWING</h3>
+                                        <div class="sliderArrowCont">
+                                            <div class="swiperButtonArrow swiper-button-prev swiper-button-white-top"></div>
+                                            <div class="swiperButtonArrow swiper-button-next swiper-button-white-top"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="swiper-container nowShowingSwiperSlider">
+                            <div class="swiper-wrapper">
+                                <!-- Backend data loading with PHP -->
+                                <?php
+                                // Assuming you have an array of movies from the backend
+                                $movies = [
+                                    [
+                                        'banner_image' => '/img/368d7394-74d4-4bb7-a1ef-c9ba8ca0c3a9.jpg',
+                                        'slug' => 'movie-slug-1',
+                                        'name' => 'Now Showing Movie 1',
+                                        'theater' => true,
+                                        'id' => 1,
+                                        'you_tube_id' => 'video-id-1'
+                                    ],
+                                    [
+                                        'banner_image' => '/img/ccf17b34-8d7c-4eb7-9a7e-99c91bb62d1b.jpg',
+                                        'slug' => 'movie-slug-2',
+                                        'name' => 'Now Showing Movie 2',
+                                        'theater' => true,
+                                        'id' => 2,
+                                        'you_tube_id' => 'video-id-2'
+                                    ]
+                                    // Add more movie data as needed
+                                ];
+            
+                                foreach ($movies as $movie) {
+                                ?>
+                                    <div class="swiper-slide" style="background-image: url(<?php echo $movie['banner_image']; ?>)">
+                                        <a href="/movie/<?php echo $movie['slug']; ?>">
+                                            <div class="overlay"></div>
+                                        </a>
+                                        <div class="movie-caption">
+                                            <a href="/movie/<?php echo $movie['slug']; ?>">
+                                                <p class="movie-name"><?php echo strtoupper($movie['name']); ?></p>
+                                            </a>
+                                            <div class="header-btn">
+                                                <?php if ($movie['theater']) { ?>
+                                                    <a href="/buy-tickets-online/<?php echo $movie['id']; ?>" class="buy-tickets">
+                                                        <p class="site-btns"><b>Buy</b> Tickets <br> <b>Online</b></p>
+                                                        <div class="bord"></div>
+                                                    </a>
+                                                <?php } ?>
+                                                <?php if ($movie['you_tube_id']) { ?>
+                                                    <a href="#" class="buy-tickets watch-trailer" data-toggle="modal" data-target="#videoModal" data-video-id="<?php echo $movie['you_tube_id']; ?>">
+                                                        <p class="site-btns">watch <br> <b>trailer</b></p>
+                                                        <div class="bord"></div>
+                                                    </a>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="swiperButtonArrow swiper-button-prev swiper-button-white"></div>
+                            <div class="swiperButtonArrow swiper-button-next swiper-button-white"></div>
+                        </div>
+                    </div>
+                </div>
+            </section> --}}
+            
+            
+
             <!-- ==================COMING SOON SECTION - large screen================= -->
-            <section id="comming-soon" class="d-none d-md-block">
+            {{-- <section id="comming-soon" class="d-none d-md-block">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="container">
@@ -462,7 +605,176 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> --}}
+
+
+
+            {{-- <section id="comming-soon" class="d-none d-md-block">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="secTitleWrap">
+                                        <h3 class="mod_header">COMING SOON</h3>
+                                        <div class="customNavigation">
+                                            <a class="btn prev"></a>
+                                            <a class="btn next"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="owl-demo" class="owl-carousel comming-soon-slider home-page-slider owl-theme">
+                            <!-- Backend data loading with PHP -->
+                            <?php
+                            // Assuming you have an array of coming soon movies from the backend
+                            $comingSoonMovies = [
+                                [
+                                    'image' => '/img/coming-soon-1.jpg',
+                                    'slug' => 'coming-soon-movie-1',
+                                    'name' => 'Coming Soon Movie 1',
+                                    'theater' => true,
+                                    'id' => 1,
+                                    'release_date' => '2023-07-01'
+                                ],
+                                [
+                                    'image' => '/img/coming-soon-2.jpg',
+                                    'slug' => 'coming-soon-movie-2',
+                                    'name' => 'Coming Soon Movie 2',
+                                    'theater' => false,
+                                    'id' => 2,
+                                    'release_date' => '2023-07-15'
+                                ]
+                                // Add more coming soon movie data as needed
+                            ];
+            
+                            foreach ($comingSoonMovies as $comingSoonMovie) {
+                            ?>
+                                <div class="item dark-bg">
+                                    <div class="img-box">
+                                        <a href="/movie/<?php echo $comingSoonMovie['slug']; ?>">
+                                            <img src="<?php echo $comingSoonMovie['image']; ?>" alt="coming soon movies" class="img-fluid poster-image">
+                                        </a>
+                                    </div>
+                                    <div class="movie-caption">
+                                        <div class="movie-name-div">
+                                            <a href="/movie/<?php echo $comingSoonMovie['slug']; ?>">
+                                                <p class="movie-name"><?php echo $comingSoonMovie['name']; ?></p>
+                                            </a>
+                                            <p class="movie-date">In Cinemas Release date: <?php echo $comingSoonMovie['release_date']; ?></p>
+                                        </div>
+                                        <div class="header-btn">
+                                            <?php if ($comingSoonMovie['theater']) { ?>
+                                                <a href="/buy-tickets-online/<?php echo $comingSoonMovie['id']; ?>" class="buy-tickets">
+                                                    <p class="site-btns"><b>Buy</b> Tickets <br> <b>Online</b></p>
+                                                    <div class="bord"></div>
+                                                </a>
+                                            <?php } ?>
+                                            <a href="#" class="watch-trailer" data-toggle="modal" data-target="#videoModal">
+                                                <p class="site-btns">watch <br> <b>trailer</b></p>
+                                                <div class="bord"></div>
+                                            </a>
+                                            <a href="/movie/<?php echo $comingSoonMovie['slug']; ?>" class="more-info">
+                                                <p class="site-btns">more <br> <b>info</b></p>
+                                                <div class="bord"></div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </section> --}}
+
+        <section id="comming-soon" class="d-none d-md-block">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="secTitleWrap">
+                                    <h3 class="mod_header">COMING SOON</h3>
+                                    <div class="customNavigation">
+                                        <a class="btn prev"></a>
+                                        <a class="btn next"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="owl-demo" class="owl-carousel comming-soon-slider home-page-slider owl-theme">
+
+                        <!-- Backend data loading with PHP -->
+                        <?php
+                        // Assuming you have an array of coming soon movies from the backend
+                        $comingSoonMovies = [
+                            [
+                                'image' => '/img/coming-soon-1.jpg',
+                                'slug' => 'coming-soon-movie-1',
+                                'name' => 'Coming Soon Movie 1',
+                                'theater' => true,
+                                'id' => 1,
+                                'release_date' => '2023-07-01'
+                                // 'you_tube_id' => 'id1'
+                            ],
+                            [
+                                'image' => '/img/coming-soon-2.jpg',
+                                'slug' => 'coming-soon-movie-2',
+                                'name' => 'Coming Soon Movie 2',
+                                'theater' => false,
+                                'id' => 2,
+                                'release_date' => '2023-07-15'
+                                // 'you_tube_id' => 'id2'
+                            ]
+                            // Add more coming soon movie data as needed
+                        ];
+                        ?>
+
+
+                        @foreach ($comingSoonMovies as $comingSoonMovie)
+                            <div class="item dark-bg">
+                                <div class="img-box">
+                                    <a href="/movie/{{ $comingSoonMovie['slug'] }}">
+                                        <img src="{{ $comingSoonMovie['image'] }}" alt="coming soon movies" class="img-fluid poster-image">
+                                    </a>
+                                </div>
+                                <div class="movie-caption">
+                                    <div class="movie-name-div">
+                                        <a href="/movie/{{ $comingSoonMovie['slug'] }}">
+                                            <p class="movie-name">{{ $comingSoonMovie['name'] }}</p>
+                                        </a>
+                                        <p class="movie-date">In Cinemas Release date</p>
+                                    </div>
+                                    <div class="header-btn">
+                                        @if ($comingSoonMovie['theater'] != '')
+                                            <a href="/buy-tickets-online/{{ $comingSoonMovie['id'] }}" class="buy-tickets">
+                                                <p class="site-btns"><b>Buy</b> Tickets <br> <b>Online</b></p>
+                                                <div class="bord"></div>
+                                            </a>
+                                        @endif
+                                        {{-- @if ($comingSoonMovie['you_tube_id'])
+                                            <a href="#" class="watch-trailer" data-toggle="modal" data-target="#videoModal">
+                                                <p class="site-btns">watch <br> <b>trailer</b></p>
+                                                <div class="bord"></div>
+                                            </a>
+                                        @endif --}}
+                                        <a href="/movie/{{ $comingSoonMovie['slug'] }}" class="more-info">
+                                            <p class="site-btns">more <br> <b>info</b></p>
+                                            <div class="bord"></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+                    
 
 
             <!-- ==================NOW SHOWING SECTION - small screen================== -->
@@ -536,6 +848,80 @@
                     </div>
                 </div>
             </section> --}}
+
+            <section id="comming-soon" class="d-block d-md-none">
+
+                <div class="container-fluid">
+                    <div class="container">
+                        <div class="row">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#now_showing" role="tab" data-toggle="tab">Now Showing</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#upcoming" role="tab" data-toggle="tab">Coming Soon</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <div class="tab-content wow fadeInLeft">
+            
+                        <div role="tabpanel" class="tab-pane fade in active show" id="now_showing">
+                            <div class="row">
+                                <div class="owl-carousel comming-soon-slider owl-theme">
+
+            
+                                    @foreach($nowShowing as $nowShowingMovie)
+                                        <div class="item dark-bg">
+                                            <div class="img-box">
+                                                <a href="/movie/{{ $nowShowingMovie['slug'] }}"><img src="{{ $nowShowingMovie['banner_image'] }}" alt="now showing movies" class="img-fluid poster-image"></a>
+                                            </div>
+                                            <div class="movie-caption">
+                                                <a href="/movie/{{ $nowShowingMovie['slug'] }}">
+                                                    <p class="movie-name">{{ $nowShowingMovie['name'] }}</p>
+                                                </a>
+                                                <p class="movie-date">Now Showing</p>
+                                                @if($nowShowingMovie['theater'])
+                                                    <p class="site-btns sm-bt"><a href="/buy-tickets-online/{{ $nowShowingMovie['id'] }}" class="buy-tickets bt">Buy Tickets</a></p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @endforeach
+            
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div role="tabpanel" class="tab-pane fade" id="upcoming">
+                            <div class="row">
+                                <div class="owl-carousel comming-soon-slider owl-theme">
+            
+                                    @foreach($comingSoonMovies as $comingSoonMovie)
+                                        <div class="item dark-bg">
+                                            <div class="img-box">
+                                                <a href="/movie/{{ $comingSoonMovie['slug'] }}"><img src="{{ $comingSoonMovie['image'] }}" alt="coming soon movies" class="img-fluid poster-image"></a>
+                                            </div>
+                                            <div class="movie-caption">
+                                                <a href="/movie/{{ $comingSoonMovie['slug'] }}">
+                                                    <p class="movie-name">{{ $comingSoonMovie['name'] }}</p>
+                                                </a>
+                                                <p class="movie-date">In cinemas coming soon release date</p>
+                                                @if($comingSoonMovie['theater'])
+                                                    <p class="site-btns sm-bt"><a href="/buy-tickets-online/{{ $comingSoonMovie['id'] }}" class="buy-tickets bt">Buy Tickets</a></p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @endforeach
+            
+                                </div>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            </section>
+            
 
 
             <!-- =======================DEALS & EXCLUSIVE SECTION======================= -->
@@ -622,6 +1008,77 @@
 
     </div>
 
+    <!-- COMING SOON MOVIES CAROUSAL JAVASCRIPT PART -->
+
+    {{-- <script>
+        $(document).ready(function() {
+        // Assuming the PHP array is already loaded and available as $comingSoonMovies
+    
+        // Function to generate the HTML for each coming soon movie
+        function generateComingSoonMovieHTML(movie) {
+            var html = '<div class="item dark-bg">' +
+                '<div class="img-box">' +
+                '<a href="/movie/' + movie.slug + '">' +
+                '<img src="' + movie.image + '" alt="coming soon movies" class="img-fluid poster-image">' +
+                '</a>' +
+                '</div>' +
+                '<div class="movie-caption">' +
+                '<div class="movie-name-div">' +
+                '<a href="/movie/' + movie.slug + '">' +
+                '<p class="movie-name">' + movie.name + '</p>' +
+                '</a>' +
+                '<p class="movie-date">In Cinemas Release date: ' + movie.release_date + '</p>' +
+                '</div>' +
+                '<div class="header-btn">';
+                
+            if (movie.theater) {
+                html += '<a href="/buy-tickets-online/' + movie.id + '" class="buy-tickets">' +
+                    '<p class="site-btns"><b>Buy</b> Tickets <br> <b>Online</b></p>' +
+                    '<div class="bord"></div>' +
+                    '</a>';
+            }
+            
+            html += '<a href="#" class="watch-trailer" data-toggle="modal" data-target="#videoModal">' +
+                '<p class="site-btns">watch <br> <b>trailer</b></p>' +
+                '<div class="bord"></div>' +
+                '</a>' +
+                '<a href="/movie/' + movie.slug + '" class="more-info">' +
+                '<p class="site-btns">more <br> <b>info</b></p>' +
+                '<div class="bord"></div>' +
+                '</a>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+    
+            return html;
+        }
+    
+        // Loop through the $comingSoonMovies array and generate HTML for each movie
+        var comingSoonMoviesHTML = '';
+        <?php foreach ($comingSoonMovies as $comingSoonMovie) { ?>
+            comingSoonMoviesHTML += generateComingSoonMovieHTML(<?php echo json_encode($comingSoonMovie); ?>);
+        <?php } ?>
+    
+        // Append the generated HTML to the carousel
+        $('#owl-demo').append(comingSoonMoviesHTML);
+    
+        // Initialize the carousel
+        $('#owl-demo').owlCarousel({
+            items: 1,
+            loop: true,
+            nav: true,
+            dots: false,
+            navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"]
+        });
+    </script> --}}
+
+    
+    
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
 
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
