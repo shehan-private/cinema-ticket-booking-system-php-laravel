@@ -290,7 +290,13 @@
 
                     this.on ('success', function(file, response) {
                         console.log (response);
-                        $('#landscape_image').val(response.image); //Assigning path called image coming from the json
+                        if (response.status) {
+                            $('#landscape_image').val(response.image); //Assigning path called image coming from the json
+                            notyf.success('Image uploaded successfully');
+                        } else {
+                            notyf.error('Something went wrong');
+                        }
+                        
                     });
                 }
             });
