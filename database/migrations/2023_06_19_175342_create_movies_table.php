@@ -14,16 +14,18 @@ return new class extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('director');
-            $table->string('producer');
-            $table->string('writer');
-            $table->integer('duration');
-            $table->string('genre');
-            $table->string('storyline');
-            $table->string('image');
-            $table->string('trailer');
+            $table->string('director')->nullable(); 
+            $table->string('writer')->nullable();
+            $table->string('actors')->nullable();
+            $table->string('duration')->nullable();
+            $table->string('genre')->nullable();
+            $table->string('imdbRanking')->nullable();
+            $table->string('storyline')->nullable();
             $table->string('status');
-            $table->string('release_date', 10);
+            $table->string('initial_screening')->nullable();
+            $table->string('trailer')->nullable();
+            $table->string('landscape_image')->nullable();
+            $table->string('portrait_image')->nullable();
             $table->timestamps();
         });
     }

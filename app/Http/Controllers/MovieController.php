@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use Illuminate\Http\Request;
 use App\Models\Movie;
 
 class MovieController extends Controller
@@ -37,17 +38,21 @@ class MovieController extends Controller
         $data = [
             'title' => $request->title,
             'director' => $request->director,
-            'producer' => $request->producer,
             'writer' => $request->writer,
+            'actors' => $request->actors,
             'duration' => $request->duration,
-            'genre' => $request->genre ?? 'thriller',
+            'genre' => $request->genre,
+            'imdbRanking' => $request->imdbRanking,
             'storyline' => $request->storyline,
-            'image' => $request->image,
-            'trailer' => $request->trailer,
             'status' => $request->status,
-            'release_date' => $request->release_date
+            'initial_screening' => $request->initial_screening,
+            'trailer' => $request->trailer,
+            'landscape_image' => $request->landscape_image,
+            'portrait_image' => $request->portrait_image
         ];
         Movie::create($data);
+
+        return redirect()->route('movie.index');
 
     }
 
@@ -104,5 +109,29 @@ class MovieController extends Controller
         $movie->delete();
         return redirect()->route('movie.index');
 
+    }
+
+    public function imageUpload(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3072', //3MB
+
+            
+        ]);
+
+        $file = $request->file('image');
+        $path = $file->store('uploads', 'public');
+
+        if ($path) {
+            return response()->json([
+                'status' => 'true',
+                'image' => $path,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'false',
+                'message' => 'Image upload failed',
+            ]);
+        }
     }
 }

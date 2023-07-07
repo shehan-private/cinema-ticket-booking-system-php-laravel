@@ -14,15 +14,17 @@ class Movie extends Model
     protected $fillable = [
         'title',
         'director',
-        'producer',
         'writer',
+        'actors',
         'duration',
         'genre',
+        'imdbRanking',
         'storyline',
-        'image',
-        'trailer',
         'status',
-        'release_date',
+        'initial_screening',
+        'trailer',
+        'landscape_image',
+        'portrait_image',
     ];
 
 

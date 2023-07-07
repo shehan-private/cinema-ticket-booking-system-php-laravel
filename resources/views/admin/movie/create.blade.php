@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group">
-                                <div class="mt-2 d-block" id="result-image"></div>
+                                <div style="color: red" class="mt-2" id="result-image"></div>
                             </div>
                         </div>
                         <div class="col-8">
@@ -60,20 +60,20 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="title">Movie Title</label>
-                        <input type="text" class="form-control" id="title" placeholder="Movie title" name="title"> 
+                        <input type="text" class="form-control" id="title" placeholder="Movie title" name="title" required> 
                     </div>
 
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="director">Director</label>
-                                <input type="text" class="form-control" id="director" placeholder="Director" name="director"> 
+                                <input type="text" class="form-control" id="director" placeholder="Director" name="director" required> 
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="writer">Writer</label>
-                                <input type="text" class="form-control" id="writer" placeholder="Writer" name="writer"> 
+                                <input type="text" class="form-control" id="writer" placeholder="Writer" name="writer" required> 
                             </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="duration">Duration</label>
-                                <input type="text" class="form-control" id="duration" placeholder="Duration" name="duration"> 
+                                <input type="text" class="form-control" id="duration" placeholder="Duration" name="duration" required> 
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="genre">Genre</label>
-                                <input type="text" class="form-control" id="genre" placeholder="Genre" name="genre"> 
+                                <input type="text" class="form-control" id="genre" placeholder="Genre" name="genre" required> 
                             </div>
                         </div>
                         <div class="col-6">
@@ -110,17 +110,7 @@
                    
                     <div class="form-group">
                         <label for="storyline">Story Line</label>
-                        <textarea class="form-control" name="storyline" id="storyline" placeholder="storyline" rows="5"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="image">Image</label>
-                        <input type="text" class="form-control" id="image" placeholder="Image URL" name="image"> 
-                    </div>
-
-                    <div class="form-group">
-                        <label for="trailer">Trailer</label>
-                        <input type="text" class="form-control" id="trailer" placeholder="Trailer URL" name="trailer"> 
+                        <textarea class="form-control" name="storyline" id="storyline" placeholder="storyline" rows="5" required></textarea>
                     </div>
 
                     <div class="row">
@@ -130,20 +120,53 @@
                                 <select class="form-control" id="status" name="status">
                                     <option>Select Status</option>
                                     <option>Now Showing</option>
-                                    <option>Up Coming</option>
+                                    <option>Coming Soon</option>
+                                    <option>Completed</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-6">
-                            
+                            <div class="form-group">
+                                <label for="initial_screening">Initial Screening Date</label>
+                                <input type="date" class="form-control" id="initial_screening" placeholder="Image URL" name="initial_screening">
+                            </div>
                         </div>
                     </div>
-                
+
+                    <div class="form-group">
+                        <label for="trailer">Movie Trailer</label>
+                        <input type="text" class="form-control" id="trailer" placeholder="Movie trailer youtube link" name="trailer" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="landscape_image">Landscape Image</label>
+                                <div style="border-color: #CED4DA; border-radius: 5px; border-width: 1px;" id="landscapeImageDrop" class="dropzone"></div>
+                                <input type="hidden" class="form-control" id="landscape_image" name="landscape_image">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="portrait_image">Portrait Image</label>
+                                <div id="portraitImageDrop" class="dropzone"></div>
+                                <input type="hidden" class="form-control" id="portrait_image" name="portrait_image">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                        </div>
+                    </div>
+
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a class="p-2 btn btn-danger d-none" id="clear-btn" href="">Clear Data</a>
+                    <a class="p-1.95 btn btn-danger" id="clear-btn" href="">Clear Data</a>
                 </div>
             </form>
         </div>
@@ -187,7 +210,7 @@
                                 
                                 $("#result-image").html(result_image)
                                 $("#grab-btn").addClass("d-inline").removeClass("d-none")
-                                $("#clear-btn").addClass("d-inline").removeClass("d-none")
+                                // $("#clear-btn").addClass("d-inline").removeClass("d-none")
 
                                 $("#search-dataTable").addClass("d-block").removeClass("d-none")
 
@@ -201,9 +224,10 @@
 
                             } else {
                                 result_image = "No data found"
-                                
+
+                                $("#result-image").html(result_image)                            
                                 $("#grab-btn").addClass("d-none").removeClass("d-inline")
-                                $("#clear-btn").addClass("d-none").removeClass("d-inline")
+                                // $("#clear-btn").addClass("d-none").removeClass("d-inline")
 
                                 $("#search-dataTable").addClass("d-none").removeClass("d-block")
 
@@ -214,9 +238,6 @@
                                 $("#search-released").addClass("d-none").removeClass("d-block")
                                 $("#search-runtime").addClass("d-none").removeClass("d-block")
 
-                                $("#result").html(result_image)
-                               
-                                
                             }
 
                             $("#grab-btn").click(function(event){
@@ -231,23 +252,50 @@
                                 $("#storyline").val(data.Plot)
                                 
                             })
-
-                            $("#clear-btn").click(function(event){
-                                event.preventDefault()
-                                $("#title").val("")
-                                $("#director").val("")
-                                $("#writer").val("")
-                                $("#actors").val("")
-                                $("#duration").val("")
-                                $("#genre").val("")
-                                $("#imdbRating").val("")
-                                $("#storyline").val("")
-                                $("#status").val("Select Status")
-                            })
                         }
                     })
+
+                    $("#clear-btn").click(function(event){
+                        event.preventDefault()
+                        $("#title").val("")
+                        $("#director").val("")
+                        $("#writer").val("")
+                        $("#actors").val("")
+                        $("#duration").val("")
+                        $("#genre").val("")
+                        $("#imdbRating").val("")
+                        $("#storyline").val("")
+                        $("#status").val("Select Status")
+                    })
+
                 })
             })
+
+        </script>
+
+        <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+
+        <script>
+            Dropzone.autoDiscover = false;
+
+            $("#landscapeImageDrop").dropzone({ 
+                url: '{{route('movie.image.upload')}}',
+                maxFileSize: 3,
+                acceptedFiles: 'image/*',
+                paramName: 'image',
+                init: function() {
+                    this.on ('sending', function(file, xhr, formData){
+                        formData.append('_token', '{{csrf_token()}}');
+                    });
+
+                    this.on ('success', function(file, response) {
+                        console.log (response);
+                        $('#landscape_image').val(response.image); //Assigning path called image coming from the json
+                    });
+                }
+            });
+
+            $("#portraitImageDrop").dropzone({ url: "/file/post" });
 
         </script>
 
