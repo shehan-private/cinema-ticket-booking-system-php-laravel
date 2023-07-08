@@ -1,0 +1,15 @@
+.img-prev .remove-btn {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 99;
+    top: 20px;
+    right: -5px;
+    font-size: 15px;
+    border: none;
+    padding: 0 7px 0 7px;
+}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Movie;
 
 class MovieController extends Controller
@@ -81,6 +82,11 @@ class MovieController extends Controller
      */
     public function update(UpdateMovieRequest $request, Movie $movie)
     {
+        if (($request->landscape_image != $movie->landscape_image) && !empty($movie->landscape_image)){
+            if($movie->landscape_image)
+            Storage::disk('public')->delete($movie->landscape_image);
+
+        }
         $data = [
             'title' => $request->title,
             'director' => $request->director,

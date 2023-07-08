@@ -2,61 +2,11 @@
     @section('content')
         <div class="card card-primary m-3">
             <div class="card-header">
-                <h3 class="card-title">Add Movie</h3>
+                <h3 class="card-title">Edit Movie</h3>
             </div>
             <form method="POST">
                 @csrf
                 @method('PATCH')
-                {{-- <div class="card-body">
-
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="search">Search Movie</label>
-                                <input type="text" class="form-control" id="search" placeholder="Movie name.." name="search">
-                                <a class="mt-2 btn btn-info " id="search-btn" href="">Search</a>
-                                                                
-                            </div>
-                        </div>
-                        <div class="col-6"></div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="form-group">
-                                <div style="color: red" class="mt-2" id="result-image"></div>
-                            </div>
-                        </div>
-                        <div class="col-8">
-                            <table id="search-dataTable" class="d-none table table-sm">
-                                <tbody>
-                                    <tr>
-                                        <td class="w-25"><div style="font-weight: bold" class="mt-2 d-none search-objects">Title</div></td>
-                                        <td><div class="mt-2 d-none" id="search-title"></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td><div style="font-weight: bold" class="mt-2 d-none search-objects">Year</div></td>
-                                        <td><div class="mt-2 d-none" id="search-year"></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td><div style="font-weight: bold" class="mt-2 d-none search-objects">Released Date</div></td>
-                                        <td><div class="mt-2 d-none" id="search-released"></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td><div style="font-weight: bold" class="mt-2 d-none search-objects">Run Time</div></td>
-                                        <td><div class="mt-2 d-none" id="search-runtime"></div></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <a class="mt-2 btn btn-success d-none" type="button" id="grab-btn" href="">Grab Data</a>
-                        
-                    </div>
-
-                </div> --}}
 
                 <div class="card-body">
                     <div class="form-group">
@@ -140,15 +90,15 @@
                         <input type="text" class="form-control" id="trailer" placeholder="Movie trailer youtube link" name="trailer" value="{{$movie->trailer}}" required>
                     </div>
 
-                    {{-- {{dd('$movie->landscape_image')}} --}}
-
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="landscape_image">Landscape Image</label>
                                 <div style="border-color: #CED4DA; border-radius: 5px; border-width: 1px;" id="landscapeImageDrop" class="dropzone {{$movie->landscape_image ? 'd-none' :''}}"></div>
-                                <img src="{{asset('storage/'.$movie->landscape_image)}}" alt="" class="img-thumbnail {{$movie->landscape_image ? '' : 'd-none'}}" id="movieImageShow">
-                                <input type="hidden" class="form-control" id="landscape_image" name="landscape_image">
+                                <br>
+                                <x-img-prev src="{{asset('storage/'.$movie->landscape_image)}}" class="{{$movie->landscape_image ? '' : 'd-none'}}" id="movieImageShow" ></x-img-prev>
+                                <input type="hidden" class="form-control" id="landscape_image" name="landscape_image" value="{{$movie->landscape_image}}">
+                                
                             </div>
                         </div>
                         <div class="col-6">
@@ -305,7 +255,14 @@
                 }
             });
 
-            $("#portraitImageDrop").dropzone({ url: "/file/post" });
+            // $("#portraitImageDrop").dropzone({ url: "/file/post" });
+
+            $("#movieImageShow .remove-btn").on('click', function() {
+                console.log('Remove button clicked');
+                $('#landscape_image').val('');
+                $('#movieImageShow').addClass('d-none');
+                $('#landscapeImageDrop').removeClass('d-none');
+            });
 
         </script>
 
