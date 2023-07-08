@@ -42,7 +42,7 @@ class MovieController extends Controller
             'actors' => $request->actors,
             'duration' => $request->duration,
             'genre' => $request->genre,
-            'imdbRanking' => $request->imdbRanking,
+            'imdbRating' => $request->imdbRating,
             'storyline' => $request->storyline,
             'status' => $request->status,
             'initial_screening' => $request->initial_screening,
@@ -84,15 +84,17 @@ class MovieController extends Controller
         $data = [
             'title' => $request->title,
             'director' => $request->director,
-            'producer' => $request->producer,
             'writer' => $request->writer,
+            'actors' => $request->actors,
             'duration' => $request->duration,
-            'genre' => $request->genre ?? 'thriller',
+            'genre' => $request->genre,
+            'imdbRating' => $request->imdbRating,
             'storyline' => $request->storyline,
-            'image' => $request->image,
-            'trailer' => $request->trailer,
             'status' => $request->status,
-            'release_date' => $request->release_date
+            'initial_screening' => $request->initial_screening,
+            'trailer' => $request->trailer,
+            'landscape_image' => $request->landscape_image,
+            'portrait_image' => $request->portrait_image
         ];
 
         $movie->update($data);

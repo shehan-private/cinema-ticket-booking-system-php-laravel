@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () { // 'permission:dashboard'
             Route::post('/add',[MovieController::class, 'store'])->name('movie.store');
             Route::get('/{movie}/edit',[MovieController::class, 'edit'])->name('movie.edit');
             Route::patch('/{movie}/edit',[MovieController::class, 'update'])->name('movie.update');
-            Route::delete('/{movie}/delete',[MovieController::class, 'destroy'])->name('movie.destroy');
+            Route::get('/{movie}/delete',[MovieController::class, 'destroy'])->name('movie.destroy');
             Route::post('/image-upload',[MovieController::class, 'imageUpload'])->name('movie.image.upload');
         });
 

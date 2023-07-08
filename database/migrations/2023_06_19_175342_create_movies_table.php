@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('actors')->nullable();
             $table->string('duration')->nullable();
             $table->string('genre')->nullable();
-            $table->string('imdbRanking')->nullable();
+            $table->string('imdbRating')->nullable();
             $table->string('storyline')->nullable();
             $table->string('status');
             $table->string('initial_screening')->nullable();

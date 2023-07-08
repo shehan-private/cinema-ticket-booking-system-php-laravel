@@ -18,7 +18,7 @@ class Movie extends Model
         'actors',
         'duration',
         'genre',
-        'imdbRanking',
+        'imdbRating',
         'storyline',
         'status',
         'initial_screening',
