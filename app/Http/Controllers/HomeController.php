@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Movie;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.web');
+        $moviesNowShowing = Movie::where('status','=','Now Showing')->get();
+        $moviesComingSoon = Movie::where('status','=','Coming Soon')->get();
+        // dd($moviesNowShowing);
+        return view('layouts.web', compact('moviesNowShowing', 'moviesComingSoon'));
     }
 }

@@ -273,56 +273,83 @@
         <div id="home" v-cloak>
 
             <!-- ==============================MAIN BANNER============================= -->
-            
+
             <section id="main-banner">
-                <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel" data-interval="5000" data-pause="false">
+                <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel" data-pause="false">
+                    <ol class="carousel-indicators">
+
+                        @foreach ($moviesNowShowing as $index => $movieNowShowing)
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}"></li>
+                        @endforeach
+                    </ol>
                     <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img class="d-block w-100" src="/img/f7839864-8ca7-4c65-9eb0-b078a14b46bd.jpg" alt="First slide">
-                        <div class="innerBannerCaption">
-                            <div class="captionCont bannerCaption ">
-                                <div class="captionWrap">
-                                    <div class="caption">
-                                        <div class="topCap topcap-title">Sub Title</div>
-                                        <h2 class="capTitle">Title</h2>
-                                        <div class="topCap bt-topcap">Buy tickets online</div>
-
-                                        <div class="movieDetail">
-                                            <div class="header-btn">
-                                                <a href="#" class="buy-tickets">
-                                                    <p class="site-btns"><b>Buy</b> Tickets <br> <b>Online</b></p>
-                                                    <div class="bord"></div>
-                                                </a>
-                                                <a href="#" class="buy-tickets watch-trailer" data-toggle="modal" data-target="#videoModal">
-                                                    <p class="site-btns">watch <br> <b>trailer</b></p>
-                                                    <div class="bord"></div>
-                                                </a>
-
+                        @foreach ($moviesNowShowing as $index => $movieNowShowing)
+                            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                <div class="innerHeader">
+                                    <div class="bannerCont">
+                                        <div class="bannerWrap">
+                                            <img src="{{asset('storage/'.$movieNowShowing->landscape_image)}}" alt="" class="img-fluid w-100 d-none d-lg-block">
+                                            <img src="{{asset('storage/'.$movieNowShowing->landscape_image)}}" alt="" class="img-fluid w-100 d-block d-lg-none">
+                                            <div class="gradientOverlay"></div>
+                                            <div class="innerBannerCaption">
+                                                <div class="captionCont bannerCaption">
+                                                    <div class="captionWrap">
+                                                        <div class="caption">
+                                                            <div class="topCap topcap-title">{{ $movieNowShowing->title }}</div>
+                                                            <h2 class="capTitle">{{ $movieNowShowing->title }}</h2>
+                                                            {{-- @if ($movieNowShowingArray['buyTicketsLink'])
+                                                                <div class="topCap bt-topcap">Buy tickets online</div>
+                                                            @endif --}}
+                                                            <div class="movieDetail">
+                                                                <div class="header-btn">
+                                                                    {{-- @if ($movieNowShowingArray['buyTicketsLink'])
+                                                                        <a href="{{ $movieNowShowingArray['buyTicketsLink'] }}" class="buy-tickets">
+                                                                            <p class="site-btns"><b>Buy</b> Tickets <br> <b>Online</b></p>
+                                                                            <div class="bord"></div>
+                                                                        </a>
+                                                                    @endif --}}
+                                                                    @if ( $movieNowShowing->trailer )
+                                                                        <a href="#" class="buy-tickets watch-trailer" data-toggle="modal" data-target="#videoModal" data-trailer-id="">
+                                                                            <p class="site-btns">watch <br> <b>trailer</b></p>
+                                                                            <div class="bord"></div>
+                                                                        </a>
+                                                                    @endif
+                                                                    @if ($movieNowShowing->id === '1')
+                                                                        <a href="/movies?festival=true" class="buy-tickets more-info">
+                                                                            <p class="site-btns"><b>More </b><br/> Info </p>
+                                                                            <div class="bord"></div>
+                                                                        </a>
+                                                                    @endif
+                                                                </div>
+                                                                <div class="header-btn small">
+                                                                    {{-- @if ($movieNowShowingArray['buyTicketsLink'])
+                                                                        <a href="{{ $movieNowShowing['buyTicketsLink'] }}" class="buy-tickets bt">
+                                                                            <p class="site-btns"><b>Buy</b> Tickets</p>
+                                                                        </a>
+                                                                    @endif --}}
+                                                                    @if ( $movieNowShowing->trailer )
+                                                                        <a href="#" class="buy-tickets watch-trailer" data-toggle="modal" data-target="#videoModal" data-trailer-id="">
+                                                                            <p class="site-btns">watch <b>trailer</b></p>
+                                                                        </a>
+                                                                    @endif
+                                                                    @if ($movieNowShowing->id === '1' )
+                                                                        <a href="/movies?festival=true" class="buy-tickets more-info" style="background-position: left 9px center;">
+                                                                            <p class="site-btns"><b>More </b><br/> Info </p>
+                                                                        </a>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-
-                                            <div class="header-btn small">
-                                                <a href="" class="buy-tickets bt">
-                                                    <p class="site-btns"><b>Buy</b> Tickets</p>
-                                                </a>
-                                                <a href="#" class="buy-tickets watch-trailer" data-toggle="modal" data-target="#videoModal">
-                                                    <p class="site-btns">watch <b>trailer</b></p>
-                                                </a>
-                                                
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="/img/368d7394-74d4-4bb7-a1ef-c9ba8ca0c3a9.jpg" alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="/img/ccf17b34-8d7c-4eb7-9a7e-99c91bb62d1b.jpg" alt="Third slide">
-                    </div>
+            
                     <a href="/buy-tickets-online" class="side-bt-btn">
                         <div class="side-bar">
                             <div class="buyTicketsWrap">
@@ -332,10 +359,18 @@
                             </div>
                         </div>
                     </a>
+            
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </section>
-            
-
+                  
 
             <!-- ==========================TRAILER VIDEO MODEL======================== -->
             <section id="trailer">
@@ -357,7 +392,6 @@
                     </div>
                 </div>
             </section>
-
 
 
             <!-- ==================NOW SHOWING SECTION - large screen================== -->
@@ -421,45 +455,46 @@
                                 <!-- Backend data loading with PHP -->
                                 <?php
                                 // Assuming you have an array of movies from the backend
-                                $nowShowing = [
-                                    [
-                                        'banner_image' => '/img/368d7394-74d4-4bb7-a1ef-c9ba8ca0c3a9.jpg',
-                                        'slug' => 'movie-slug-1',
-                                        'name' => 'Now Showing Movie 1',
-                                        'theater' => true,
-                                        'id' => 1,
-                                        'you_tube_id' => 'video-id-1'
-                                    ],
-                                    [
-                                        'banner_image' => '/img/ccf17b34-8d7c-4eb7-9a7e-99c91bb62d1b.jpg',
-                                        'slug' => 'movie-slug-2',
-                                        'name' => 'Now Showing Movie 2',
-                                        'theater' => true,
-                                        'id' => 2,
-                                        'you_tube_id' => 'video-id-2'
-                                    ]
-                                    // Add more movie data as needed
-                                ]; ?>
+                                // $nowShowing = [
+                                //     [
+                                //         'banner_image' => '/img/368d7394-74d4-4bb7-a1ef-c9ba8ca0c3a9.jpg',
+                                //         'slug' => 'movie-slug-1',
+                                //         'name' => 'Now Showing Movie 1',
+                                //         'theater' => true,
+                                //         'id' => 1,
+                                //         'you_tube_id' => 'video-id-1'
+                                //     ],
+                                //     [
+                                //         'banner_image' => '/img/ccf17b34-8d7c-4eb7-9a7e-99c91bb62d1b.jpg',
+                                //         'slug' => 'movie-slug-2',
+                                //         'name' => 'Now Showing Movie 2',
+                                //         'theater' => true,
+                                //         'id' => 2,
+                                //         'you_tube_id' => 'video-id-2'
+                                //     ]
+                                //     // Add more movie data as needed
+                                // ]; 
+                                ?>
 
 
-                                @foreach ($nowShowing as $nowShowingMovie)
-                                    <div class="swiper-slide" style="background-image: url({{ $nowShowingMovie['banner_image'] }})">
-                                        <a href="/movie/{{ $nowShowingMovie['slug'] }}">
+                                @foreach ($moviesNowShowing as $movieNowShowing)
+                                    <div class="swiper-slide" style="background-image: url({{asset('storage/'.$movieNowShowing->landscape_image)}})">
+                                        {{-- <a href="/movie/{{ $nowShowingMovie['slug'] }}">
                                             <div class="overlay"></div>
-                                        </a>
+                                        </a> --}}
                                         <div class="movie-caption">
-                                            <a href="/movie/{{ $nowShowingMovie['slug'] }}">
-                                                <p class="movie-name">{{ strtoupper($nowShowingMovie['name']) }}</p>
-                                            </a>
+                                            {{-- <a href="/movie/{{ $nowShowingMovie['slug'] }}"> --}}
+                                                <p class="movie-name">{{ strtoupper($movieNowShowing->title) }}</p>
+                                            {{-- </a> --}}
                                             <div class="header-btn">
-                                                @if ($nowShowingMovie['theater'] != '')
-                                                    <a href="/buy-tickets-online/{{ $nowShowingMovie['id'] }}" class="buy-tickets">
+                                                {{-- @if ($nowShowingMovie['theater'] != '') --}}
+                                                    <a href="/buy-tickets-online/{{ $movieNowShowing->id }}" class="buy-tickets">
                                                         <p class="site-btns"><b>Buy</b> Tickets <br> <b>Online</b></p>
                                                         <div class="bord"></div>
                                                     </a>
-                                                @endif
-                                                @if ($nowShowingMovie['you_tube_id'])
-                                                    <a href="#" class="buy-tickets watch-trailer" data-toggle="modal" data-target="#videoModal" data-video-id="{{ $nowShowingMovie['you_tube_id'] }}">
+                                                {{-- @endif --}}
+                                                @if ($movieNowShowing->trailer)
+                                                    <a href="#" class="buy-tickets watch-trailer" data-toggle="modal" data-target="#videoModal" data-video-id="{{ $movieNowShowing->trailer }}">
                                                         <p class="site-btns">watch <br> <b>trailer</b></p>
                                                         <div class="bord"></div>
                                                     </a>
@@ -707,64 +742,37 @@
                     </div>
                     <div id="owl-demo" class="owl-carousel comming-soon-slider home-page-slider owl-theme">
 
-                        <!-- Backend data loading with PHP -->
-                        <?php
-                        // Assuming you have an array of coming soon movies from the backend
-                        $comingSoonMovies = [
-                            [
-                                'image' => '/img/coming-soon-1.jpg',
-                                'slug' => 'coming-soon-movie-1',
-                                'name' => 'Coming Soon Movie 1',
-                                'theater' => true,
-                                'id' => 1,
-                                'release_date' => '2023-07-01'
-                                // 'you_tube_id' => 'id1'
-                            ],
-                            [
-                                'image' => '/img/coming-soon-2.jpg',
-                                'slug' => 'coming-soon-movie-2',
-                                'name' => 'Coming Soon Movie 2',
-                                'theater' => false,
-                                'id' => 2,
-                                'release_date' => '2023-07-15'
-                                // 'you_tube_id' => 'id2'
-                            ]
-                            // Add more coming soon movie data as needed
-                        ];
-                        ?>
-
-
-                        @foreach ($comingSoonMovies as $comingSoonMovie)
+                        @foreach ($moviesComingSoon as $movieComingSoon)
                             <div class="item dark-bg">
                                 <div class="img-box">
-                                    <a href="/movie/{{ $comingSoonMovie['slug'] }}">
-                                        <img src="{{ $comingSoonMovie['image'] }}" alt="coming soon movies" class="img-fluid poster-image">
-                                    </a>
+                                    {{-- <a href="/movie/{{ $comingSoonMovie['slug'] }}"> --}}
+                                        <img src="{{ asset('storage/'.$movieComingSoon->portrait_image) }}" alt="coming soon movies" class="img-fluid poster-image">
+                                    {{-- </a> --}}
                                 </div>
                                 <div class="movie-caption">
                                     <div class="movie-name-div">
-                                        <a href="/movie/{{ $comingSoonMovie['slug'] }}">
-                                            <p class="movie-name">{{ $comingSoonMovie['name'] }}</p>
-                                        </a>
+                                        {{-- <a href="/movie/{{ $comingSoonMovie['slug'] }}"> --}}
+                                            <p class="movie-name">{{ $movieComingSoon->title }}</p>
+                                        {{-- </a> --}}
                                         <p class="movie-date">In Cinemas Release date</p>
                                     </div>
                                     <div class="header-btn">
-                                        @if ($comingSoonMovie['theater'] != '')
-                                            <a href="/buy-tickets-online/{{ $comingSoonMovie['id'] }}" class="buy-tickets">
+                                        {{-- @if ($comingSoonMovie['theater'] != '') --}}
+                                            <a href="/buy-tickets-online/{{ $movieComingSoon->id }}" class="buy-tickets">
                                                 <p class="site-btns"><b>Buy</b> Tickets <br> <b>Online</b></p>
                                                 <div class="bord"></div>
                                             </a>
-                                        @endif
+                                        {{-- @endif --}}
                                         {{-- @if ($comingSoonMovie['you_tube_id'])
                                             <a href="#" class="watch-trailer" data-toggle="modal" data-target="#videoModal">
                                                 <p class="site-btns">watch <br> <b>trailer</b></p>
                                                 <div class="bord"></div>
                                             </a>
                                         @endif --}}
-                                        <a href="/movie/{{ $comingSoonMovie['slug'] }}" class="more-info">
+                                        {{-- <a href="/movie/{{ $comingSoonMovie['slug'] }}" class="more-info"> --}}
                                             <p class="site-btns">more <br> <b>info</b></p>
                                             <div class="bord"></div>
-                                        </a>
+                                        {{-- </a> --}}
                                     </div>
                                 </div>
                             </div>
@@ -772,6 +780,7 @@
                     </div>
                 </div>
             </div>
+            <br><br><br><br><br>
         </section>
         
                     
@@ -779,6 +788,9 @@
 
             <!-- ==================NOW SHOWING SECTION - small screen================== -->
             <!-- ==================COMING SOON SECTION - small screen================= -->
+
+            {{-- These 2 code blocks are original ones --}}
+
             {{-- <section id="comming-soon" class="d-block d-md-none">
 
                 <div class="container-fluid">
@@ -849,7 +861,7 @@
                 </div>
             </section> --}}
 
-            <section id="comming-soon" class="d-block d-md-none">
+            {{-- <section id="comming-soon" class="d-block d-md-none">
 
                 <div class="container-fluid">
                     <div class="container">
@@ -920,7 +932,7 @@
             
                     </div>
                 </div>
-            </section>
+            </section> --}}
             
 
 
@@ -974,7 +986,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 ">
                                 <form class="subscribe">
                                     <div id="success" class="text-success pb-2"></div>
@@ -992,11 +1004,11 @@
                                 </form>
                             </div>
 
-                        </div>
+                        </div> --}}
                         <div class="row">
                             <div class="col-12 footerBaseline">
                                 <div class="copyright">
-                                    <span class="copy">©2022 Scope Cinemas All Right Reserved. Developed by <a href="https://archmage.lk/" target="_blank">Archmage Solutions</a>.</span>
+                                    <span class="copy">©2023 Scope Cinemas All Right Reserved. Developed by Shehan Rathnayake.</span>
                                 </div>
 
                             </div>
@@ -1072,20 +1084,11 @@
         });
     </script> --}}
 
-    
-    
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
-
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-
     <script src="https://checkout.stripe.com/checkout.js"></script>
-
 
     <script>
         delete window.self;

@@ -155,7 +155,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="portrait_image">Portrait Image</label>
-                                <div id="portraitImageDrop" class="dropzone"></div>
+                                <div style="border-color: #CED4DA; border-radius: 5px; border-width: 1px;" id="portraitImageDrop" class="dropzone"></div>
                                 <input type="hidden" class="form-control" id="portrait_image" name="portrait_image">
                             </div>
                         </div>
@@ -301,7 +301,30 @@
                 }
             });
 
-            $("#portraitImageDrop").dropzone({ url: "/file/post" });
+            $("#portraitImageDrop").dropzone({ 
+                url: '{{route('movie.image.upload')}}',
+                maxFileSize: 3,
+                acceptedFiles: 'image/*',
+                paramName: 'image',
+                init: function() {
+                    this.on ('sending', function(file, xhr, formData){
+                        formData.append('_token', '{{csrf_token()}}');
+                    });
+
+                    this.on ('success', function(file, response) {
+                        console.log (response);
+                        if (response.status) {
+                            $('#portrait_image').val(response.image); //Assigning path called image coming from the json
+                            notyf.success('Image uploaded successfully');
+                        } else {
+                            notyf.error('Something went wrong');
+                        }
+                        
+                    });
+                }
+            });
+
+            
 
         </script>
 

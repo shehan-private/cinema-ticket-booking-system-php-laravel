@@ -96,7 +96,7 @@
                                 <label for="landscape_image">Landscape Image</label>
                                 <div style="border-color: #CED4DA; border-radius: 5px; border-width: 1px;" id="landscapeImageDrop" class="dropzone {{$movie->landscape_image ? 'd-none' :''}}"></div>
                                 <br>
-                                <x-img-prev src="{{asset('storage/'.$movie->landscape_image)}}" class="{{$movie->landscape_image ? '' : 'd-none'}}" id="movieImageShow" ></x-img-prev>
+                                <x-img-prev src="{{asset('storage/'.$movie->landscape_image)}}" class="{{$movie->landscape_image ? '' : 'd-none'}}" id="landscapeImageShow" ></x-img-prev>
                                 <input type="hidden" class="form-control" id="landscape_image" name="landscape_image" value="{{$movie->landscape_image}}">
                                 
                             </div>
@@ -109,8 +109,10 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="portrait_image">Portrait Image</label>
-                                <div id="portraitImageDrop" class="dropzone"></div>
-                                <input type="hidden" class="form-control" id="portrait_image" name="portrait_image">
+                                <div style="border-color: #CED4DA; border-radius: 5px; border-width: 1px;" id="portraitImageDrop" class="dropzone {{$movie->portrait_image ? 'd-none' :''}}"></div>
+                                <br>
+                                <x-img-prev src="{{asset('storage/'.$movie->portrait_image)}}" class="{{$movie->portrait_image ? '' : 'd-none'}}" id="portraitImageShow" ></x-img-prev>
+                                <input type="hidden" class="form-control" id="portrait_image" name="portrait_image" value="{{$movie->portrait_image}}">
                             </div>
                         </div>
                         <div class="col-6">
@@ -255,13 +257,43 @@
                 }
             });
 
+            $("#portraitImageDrop").dropzone({ 
+                url: '{{route('movie.image.upload')}}',
+                maxFileSize: 3,
+                acceptedFiles: 'image/*',
+                paramName: 'image',
+                init: function() {
+                    this.on ('sending', function(file, xhr, formData){
+                        formData.append('_token', '{{csrf_token()}}');
+                    });
+
+                    this.on ('success', function(file, response) {
+                        console.log (response);
+                        if (response.status) {
+                            $('#portrait_image').val(response.image); //Assigning path called image coming from the json
+                            notyf.success('Image uploaded successfully');
+                        } else {
+                            notyf.error('Something went wrong');
+                        }
+                        
+                    });
+                }
+            });
+
             // $("#portraitImageDrop").dropzone({ url: "/file/post" });
 
-            $("#movieImageShow .remove-btn").on('click', function() {
+            $("#landscapeImageShow .remove-btn").on('click', function() {
                 console.log('Remove button clicked');
                 $('#landscape_image').val('');
-                $('#movieImageShow').addClass('d-none');
+                $('#landscapeImageShow').addClass('d-none');
                 $('#landscapeImageDrop').removeClass('d-none');
+            });
+
+            $("#portraitImageShow .remove-btn").on('click', function() {
+                console.log('Remove button clicked');
+                $('#portrait_image').val('');
+                $('#portraitImageShow').addClass('d-none');
+                $('#portraitImageDrop').removeClass('d-none');
             });
 
         </script>
