@@ -19,7 +19,8 @@ class Session extends Model
         'status',
         'attend_full',
         'attend_half',
-        'income'
+        'income',
+        'is_live'
     ];
 
 

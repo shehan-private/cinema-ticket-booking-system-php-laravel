@@ -14,6 +14,7 @@
                             <th>Tickets Sold (Full)</th>
                             <th>Tickets Sold (Half)</th>
                             <th>Income (Rs.)</th>
+                            <th>Live</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -26,6 +27,7 @@
                                     <td>{{$session_date['attend_full']}}</td>
                                     <td>{{$session_date['attend_half']}}</td>
                                     <td>{{$session_date['income']}}</td>
+                                    <td>{{$session_date['is_live']}}</td>
                                     <td>
                                         <a href="{{route('session.show', $session_date['date'])}}" class="btn btn-sm btn-primary">View</a>
                                         
@@ -51,6 +53,7 @@
                             <th>Tickets Sold (Full)</th>
                             <th>Tickets Sold (Half)</th>
                             <th>Income (Rs.)</th>
+                            <th>Live</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -63,6 +66,7 @@
                                     <td>{{$session_date['attend_full']}}</td>
                                     <td>{{$session_date['attend_half']}}</td>
                                     <td>{{$session_date['income']}}</td>
+                                    <td>{{$session_date['is_live']}}</td>
                                     <td>
                                         <a href="{{route('session.show', $session_date['date'])}}" class="btn btn-sm btn-primary">View</a>
                                         

@@ -31,8 +31,11 @@ class SessionController extends Controller
             'status' => '',
             'attend_full' => 0,
             'attend_half' => 0,
-            'income' => 0
+            'income' => 0,
+            'is_live' => 'No'
         );
+
+        // dd($session_array['date']);
         
         foreach ($sessions as $session) {
 
@@ -41,10 +44,15 @@ class SessionController extends Controller
                 'status' => $session->status,
                 'attend_full' => $session->attend_full,
                 'attend_half' => $session->attend_half,
-                'income' => $session->income
+                'income' => $session->income,
+                'is_live' => $session->is_live
             );
 
+            
+
             if ($session_array['date'] != $session_temp['date']) {
+
+                
                 if ($session_temp['date']!= '') {
                     array_push($session_dates, $session_temp);
                 }
@@ -58,7 +66,10 @@ class SessionController extends Controller
                 $session_temp['income'] += $session_array['income'];
                 
             }
+            
         }
+
+        // dd($session_dates);
 
         return view ('admin.session.index', compact('session_dates', 'sessions_today','sessions_schedule','sessions_complete','times','screens','movies'));
         
@@ -94,13 +105,14 @@ class SessionController extends Controller
                     'time_id' => (int)($timeVal[$i]),
                     'movie_id' => (int)($movieVal[$i]),
                     'status' => 'Scheduled',
+                    'is_live' => 'No'
                 ];
 
                 Session::create($data);
             }
         }
 
-        return redirect()->route('session.create');
+        return redirect()->route('session.index');
     }
 
     /**

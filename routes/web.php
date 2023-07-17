@@ -7,6 +7,7 @@ use App\Http\Controllers\ClassModelController;
 use App\Http\Controllers\ScreenController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\WebsessionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -87,12 +88,25 @@ Route::middleware(['auth'])->group(function () { // 'permission:dashboard'
             Route::get('/{category}/delete',[CategoryController::class, 'destroy'])->name('category.destroy');
         });
 
+        //Tickets CRUD
+        
+
     });
 });
+
+Route::prefix('/buy-tickets-online')->group(function(){
+    Route::get('/',[WebsessionController::class, 'index'])->name('websession.index');
+    // Route::get('/{date}',[WebsessionController::class, 'display'])->name('websession.display.get');
+    Route::post('/',[WebsessionController::class, 'index'])->name('websession.index');
+});
+
+Route::get('/buy-tickets-online', [WebsessionController::class, 'index'])->name('buy-tickets-online');
 
 
 require __DIR__.'/auth.php';
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 
 Auth::routes();

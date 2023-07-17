@@ -273,7 +273,7 @@
         <div id="buyticketsonline" v-cloak>
 
             <!-- ============================= BUY TICKETS ============================= -->
-            <section id="buy-tickets" class="buy-tickets-bg">
+            {{-- <section id="buy-tickets" class="buy-tickets-bg">
                 <div class="container ">
                     <div class="border-top title-border">
                         <div class="row">
@@ -437,7 +437,162 @@
 
                 </div>
 
+            </section> --}}
+
+
+            <section id="buy-tickets" class="buy-tickets-bg">
+                <div class="container">
+                    <div class="border-top title-border">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 title">
+                                <h3 class="mod_header title">BUY TICKETS</h3>
+                                <a href="/" class="breadcrumb-link d-none d-md-block">Home</a>
+                                <p class="breadcrumb-active d-none d-md-block"> / BUY TICKETS</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
+            
+            <section id="buy-tickets" class="pb-5">
+                <div class="container">
+                    <div class="table table-responsive">
+                        <div class="dropdown-row">
+
+                            <!-- Dropdowns -->
+
+                            <div class="bt-dropdown">
+                                <div class="form-group">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle locations" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                        <select class="form-control selectDropdown dropdown-toggle" onchange="selectLocation(this.value)">
+                                            <option value="{{date('Y-m-d')}}" selected>Today</option>
+
+                                            @foreach($live_dates as $live_date)
+                                                @if ($live_date != date('Y-m-d'))
+                                                    <option value="{{ $live_date }}">{{ $live_date }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bt-dropdown">
+                                <div class="form-group">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle locations" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                        <select class="form-control selectDropdown" onchange="selectLocation(this.value)">
+                                            <option label="All Movies" value="" selected>All Movies</option>
+                                            @foreach($live_movies as $live_movie)
+                                                <option value="{{ $live_movie }}">{{ $live_movie }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bt-dropdown">
+                                <div class="form-group">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle locations" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                        <select class="form-control selectDropdown" onchange="selectLocation(this.value)">
+                                            <option label="All Experiences" value="" selected>All Experiences</option>
+                                            @foreach($class_models_names as $class_models_name)
+                                                <option value="{{ $class_models_name }}">{{ $class_models_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    @php
+                        $live_date = '2023-07-10';
+                        $live_movie = 'Spider-Man: Across the Spider-Verse';
+                        $class_model_name = 'Gold';
+                    @endphp
+
+                    
+
+
+
+                    <div class="row bt-show-time-row">
+                        @foreach($live_dates as $live_date)
+                            @foreach($live_movies as $live_movie)
+                                {{-- <div class="col-md-12">
+                                    <div class="d-block d-md-none" v-if="selectedMovie != ''">
+                                        <div class="row small-movie-row no-gutters">
+                                            <div class="col-2">
+                                                <a href="/movie/{{ $movie->slug }}"><img src="{{ $movie->image }}" alt="movie" class="img-fluid poster-image"></a>
+                                            </div>
+                                            <div class="col-10 pl-3">
+                                                <p class="movie-name sm-movie-name"></p>
+                                                <p><a href="#" class="wt-movie-small trailer" data-toggle="modal" data-target="#videoModal">watch trailer</a></p>
+                                                <p><a href="/movie/{{ $movie->slug }}" class="wt-movie-small more">More Info</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> --}}
+                
+                                <div class="col-xl-9 col-lg-9 col-md-6 col-sm-12">
+                                    <div class="secTitleWrap">
+                                        <h3 class="secTitle mb-0 ng-binding">{{$live_movie}}</h3>
+                                    </div>
+
+                                    @foreach($class_models_names as $class_models_name)
+                                        <div class="bt-contents">
+                                            <div class="bt-theater-name-div">
+                                                <p class="bt-theater-name">{{$class_models_name}}</p>
+                                            </div>
+                                            @foreach($live_sessions as $live_session)
+                                                @if($live_session->date === $live_date && $movies->find($live_session->movie_id)->title === $live_movie && $class_models->find(($screens->find($live_session->screen_id)->id))->name === $class_models_name)
+                                                    <a href="" class="bt-showtime-btn">{{$times->find($live_session->time_id)->time}}</a>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                
+                                {{-- <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12" v-if="selectedMovie != ''">
+                                    <div class="info-item d-none d-md-block">
+                                        <img src="{{ $movie->image }}" alt="poster" class="img-fluid">
+                                        <div class="movie-caption">
+                                            <p class="movie-name">{{ $movie->name }}</p>
+                                            <p class="movie-date">NOW SCREENING</p>
+                                            <div class="header-btn">
+                                                <a href="#" class="buy-tickets watch-trailer">watch <br> <b>trailer</b></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> --}}
+                            @endforeach
+                        @endforeach
+                        <!-- Loading spinner and alert messages -->
+
+                        {{-- <div class="d-flex justify-content-center" v-if="itemSync === false">
+                            <div class="spinner-border m-5" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+            
+                        <div class="alert alert-dark text-center" role="alert" v-if="itemSync === true && _sessions.length==0">
+                            Showtimes are not available for this date. Please check back again later.
+                        </div> --}}
+                    </div>
+                </div>
+            </section>
+
+            {{-- <section>
+                <div class="container">
+                    <div id="result"></div>
+                </div>
+                
+            </section> --}}
+            
 
 
             <!-- ==========================TRAILER VIDEO MODEL======================== -->
@@ -611,11 +766,22 @@
 
     </div>
 
-
-
-
-
     <script src="https://checkout.stripe.com/checkout.js"></script>
+
+    {{-- <script>
+        $(document).ready(function() {
+
+            $('#result').html({
+                ajax: {
+                    
+                    url: "{{route('websession.index')}}",
+                    method: 'GET'
+                }
+            });
+            
+        });
+
+    </script> --}}
 
 
     <script>
